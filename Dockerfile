@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 RUN apt-get update ; \
     apt-get dist-upgrade -y ; \
-    apt-get install -y wget libgoogle-perftools-dev vim-tiny unzip; \
+    apt-get install -y wget libgoogle-perftools-dev vim-tiny; \
     apt-get build-dep nginx -y;\
     wget http://nginx.org/download/nginx-1.11.1.tar.gz; \
     tar zxvf nginx-1.11.1.tar.gz ;\
@@ -12,22 +12,9 @@ RUN apt-get update ; \
     useradd nginx;\
     rm -rf /var/lib/apt/lists/*;\
     cd ..;\
-    rm -rf nginx-1.11.1*; 
-
+    rm -rf nginx-1.11.1*;
     
-ENV CONSUL_TEMPLATE_VERSION 0.14.0
-RUN wget -O consul-template.zip  https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip ;\
-    unzip consul-template.zip -d /bin/ ; \
-    rm consul-template.zip;
 
-ENV CONTAINERPILOT_VER 2.1.4
-ENV CONTAINERPILOT file:///etc/containerpilot.json 
-
-RUN wget -O containerpilot.tar.gz          "https://github.com/joyent/containerpilot/releases/download/${CONTAINERPILOT_VER}/containerpilot-${CONTAINERPILOT_VER}.tar.gz" ;\
-        tar  zxvf containerpilot.tar.gz -C /bin/; \
-        rm containerpilot.tar.gz;
-
-COPY containerpilot.json /etc
 
 ENV TERM xterm
 VOLUME ["/tmp/nginx"]
@@ -36,9 +23,8 @@ EXPOSE 80 443
 ENV HOME /root
 WORKDIR /root
 
-COPY nginx.conf.ctmpl /etc/nginx/nginx.conf.ctmpl
-
-CMD ["/bin/containerpilot", "nginx", "-g", "daemon off;"]
+COPY nginx.conf /etc/nginx/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]
 
 
 
