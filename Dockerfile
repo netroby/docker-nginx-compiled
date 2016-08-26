@@ -19,7 +19,6 @@ RUN apt-get update ; \
 ENV TERM xterm
 VOLUME ["/tmp/nginx"]
 
-EXPOSE 80 443
 ENV HOME /root
 WORKDIR /root
 
