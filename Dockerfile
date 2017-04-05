@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-ENV NGX_VER 1.11.8   
+ENV NGX_VER 1.11.13   
 RUN apt-get update ; \
     apt-get dist-upgrade -y ; \
     apt-get install -y wget libgoogle-perftools-dev vim-tiny; \
