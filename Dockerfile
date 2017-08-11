@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 ENV NGX_VER 1.13.4   
-RUN sed -i "/^# deb-src/ s/^# //" /etc/apt/sources.list.new; \
+RUN sed -i "/^# deb-src/ s/^# //" /etc/apt/sources.list; \
     apt-get update ; \
     apt-get dist-upgrade -y ; \
     apt-get install -y wget libgoogle-perftools-dev vim-tiny; \
