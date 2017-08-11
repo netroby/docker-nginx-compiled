@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 ENV NGX_VER 1.13.4   
-RUN apt-get update ; \
+RUN sed -i "/^# deb-src/ s/^# //" /etc/apt/sources.list.new; \
+    apt-get update ; \
     apt-get dist-upgrade -y ; \
     apt-get install -y wget libgoogle-perftools-dev vim-tiny; \
     apt-get build-dep nginx -y;\
