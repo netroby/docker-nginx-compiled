@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-ENV NGX_VER 1.13.4   
+ENV NGX_VER 1.15.9   
 RUN sed -i "/^# deb-src/ s/^# //" /etc/apt/sources.list; \
     apt-get update ; \
     apt-get dist-upgrade -y ; \
@@ -15,8 +15,6 @@ RUN sed -i "/^# deb-src/ s/^# //" /etc/apt/sources.list; \
     cd ..;\
     rm -rf nginx-${NGX_VER};
     
-FROM ubuntu:xenial
-COPY --from=0 /usr/local/nginx /usr/local/
 
 ENV TERM xterm
 VOLUME ["/tmp/nginx"]
